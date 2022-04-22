@@ -1,0 +1,43 @@
+{
+  "picBed": {
+    "current": "gitee",
+    "uploader": "gitee",
+    "smms": {
+      "token": ""
+    },
+    "gitee": {
+      "repo": "LittleShark/obimg",
+      "branch": "master",
+      "token": "4cebe98ffb3ac18631fb905606626475",
+      "path": "img",
+      "customPath": "yearMonth",
+      "customUrl": ""
+    }
+  },
+  "settings": {
+    "shortKey": {
+      "picgo:upload": {
+        "enable": true,
+        "key": "CommandOrControl+Shift+P",
+        "name": "upload",
+        "label": "快捷上传"
+      }
+    },
+    "server": {
+      "port": 36677,
+      "host": "127.0.0.1",
+      "enable": true
+    },
+    "privacyEnsure": true,
+    "showUpdateTip": true
+  },
+  "picgoPlugins": {
+    "picgo-plugin-gitee-uploader": true
+  },
+  "debug": true,
+  "PICGO_ENV": "GUI",
+  "needReload": false,
+  "picgo-plugin-gitee-uploader": {
+    "lastSync": "2022-04-07 07:47:22"
+  }
+}
