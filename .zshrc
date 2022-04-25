@@ -1,193 +1,119 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-# Start configuration added by Zim install {{{
+# Personal Zsh configuration file. It is strongly recommended to keep all
+# shell customization and configuration (including exported environment
+# variables such as PATH) in this file or in files sourced from it.
 #
-# User configuration sourced by interactive shells
+# Documentation: https://github.com/romkatv/zsh4humans/blob/v5/README.md.
+
+# Periodic auto-update on Zsh startup: 'ask' or 'no'.
+# You can manually run `z4h update` to update everything.
+zstyle ':z4h:' auto-update      'no'
+# Ask whether to auto-update this often; has no effect if auto-update is 'no'.
+zstyle ':z4h:' auto-update-days '28'
+
+# Keyboard type: 'mac' or 'pc'.
+zstyle ':z4h:bindkey' keyboard  'pc'
+
+# Start tmux if not already in tmux.
+zstyle ':z4h:' start-tmux       command tmux -u new -A -D -t z4h
+
+# Mark up shell's output with semantic information.
+zstyle ':z4h:' term-shell-integration 'yes'
+
+# Right-arrow key accepts one character ('partial-accept') from
+# command autosuggestions or the whole thing ('accept')?
+zstyle ':z4h:autosuggestions' forward-char 'accept'
+
+# Recursively traverse directories when TAB-completing files.
+zstyle ':z4h:fzf-complete' recurse-dirs 'no'
+
+# Enable direnv to automatically source .envrc files.
+zstyle ':z4h:direnv'         enable 'no'
+# Show "loading" and "unloading" notifications from direnv.
+zstyle ':z4h:direnv:success' notify 'yes'
+
+# Enable ('yes') or disable ('no') automatic teleportation of z4h over
+# SSH when connecting to these hosts.
+zstyle ':z4h:ssh:example-hostname1'   enable 'yes'
+zstyle ':z4h:ssh:*.example-hostname2' enable 'no'
+# The default value if none of the overrides above match the hostname.
+zstyle ':z4h:ssh:*'                   enable 'no'
+
+# Send these files over to the remote host when connecting over SSH to the
+# enabled hosts.
+zstyle ':z4h:ssh:*' send-extra-files '~/.nanorc' '~/.env.zsh'
+
+# Clone additional Git repositories from GitHub.
 #
+# This doesn't do anything apart from cloning the repository and keeping it
+# up-to-date. Cloned files can be used after `z4h init`. This is just an
+# example. If you don't plan to use Oh My Zsh, delete this line.
+z4h install ohmyzsh/ohmyzsh || return
 
-# -----------------
-# Zsh configuration
-# -----------------
+# Install or update core components (fzf, zsh-autosuggestions, etc.) and
+# initialize Zsh. After this point console I/O is unavailable until Zsh
+# is fully initialized. Everything that requires user interaction or can
+# perform network I/O must be done above. Everything else is best done below.
+z4h init || return
 
+# Extend PATH.
+path=(~/bin $path)
+
+# Export environment variables.
+export GPG_TTY=$TTY
+
+# Source additional local files if they exist.
+z4h source ~/.env.zsh
+
+# Use additional Git repositories pulled in with `z4h install`.
 #
-# History
+# This is just an example that you should delete. It does nothing useful.
+z4h source ohmyzsh/ohmyzsh/lib/diagnostics.zsh  # source an individual file
+z4h load   ohmyzsh/ohmyzsh/plugins/emoji-clock  # load a plugin
+z4h load   ohmyzsh/ohmyzsh/plugins/extract # load a plugin
+z4h load   ohmyzsh/ohmyzsh/plugins/sudo # load a plugin
+
+# Define key bindings.
+z4h bindkey z4h-backward-kill-word  Ctrl+Backspace     Ctrl+H
+z4h bindkey z4h-backward-kill-zword Ctrl+Alt+Backspace
+
+z4h bindkey undo Ctrl+/ Shift+Tab  # undo the last command line change
+z4h bindkey redo Alt+/             # redo the last undone command line change
+
+z4h bindkey z4h-cd-back    Alt+Left   # cd into the previous directory
+z4h bindkey z4h-cd-forward Alt+Right  # cd into the next directory
+z4h bindkey z4h-cd-up      Alt+Up     # cd into the parent directory
+z4h bindkey z4h-cd-down    Alt+Down   # cd into a child directory
+
+# Autoload functions.
+autoload -Uz zmv
+
+# Define functions and completions.
+function md() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
+compdef _directories md
+
+# Define named directories: ~w <=> Windows home directory on WSL.
+[[ -z $z4h_win_home ]] || hash -d w=$z4h_win_home
+
+# Define aliases.
+alias tree='tree -a -I .git'
+
+# Add flags to existing aliases.
+alias ls="${aliases[ls]:-ls} -A"
+
+# Set shell options: http://zsh.sourceforge.net/Doc/Release/Options.html.
+setopt glob_dots     # no special treatment for file names with a leading dot
+setopt no_auto_menu  # require an extra TAB press to open the completion menu
+
+alias :q="exit"
+alias vi="nvim.appimage"
+alias nvim="nvim.appimage"
+
+
+
+
+
+##export 
 #
-
-# Remove older command from the history if a duplicate is to be added.
-setopt HIST_IGNORE_ALL_DUPS
-
-#
-# Input/output
-#
-
-# Set editor default keymap to emacs (`-e`) or vi (`-v`)
-bindkey -e
-
-# Prompt for spelling correction of commands.
-#setopt CORRECT
-
-# Customize spelling correction prompt.
-#SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
-
-# Remove path separator from WORDCHARS.
-WORDCHARS=${WORDCHARS//[\/]}
-
-# -----------------
-# Zim configuration
-# -----------------
-
-# Use degit instead of git as the default tool to install and update modules.
-#zstyle ':zim:zmodule' use 'degit'
-
-# --------------------
-# Module configuration
-# --------------------
-
-#
-# completion
-#
-
-# Set a custom path for the completion dump file.
-# If none is provided, the default ${ZDOTDIR:-${HOME}}/.zcompdump is used.
-#zstyle ':zim:completion' dumpfile "${ZDOTDIR:-${HOME}}/.zcompdump-${ZSH_VERSION}"
-
-#
-# git
-#
-
-# Set a custom prefix for the generated aliases. The default prefix is 'G'.
-#zstyle ':zim:git' aliases-prefix 'g'
-
-#
-# input
-#
-
-# Append `../` to your input for each `.` you type after an initial `..`
-#zstyle ':zim:input' double-dot-expand yes
-
-#
-# termtitle
-#
-
-# Set a custom terminal title format using prompt expansion escape sequences.
-# See http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Simple-Prompt-Escapes
-# If none is provided, the default '%n@%m: %~' is used.
-#zstyle ':zim:termtitle' format '%1~'
-
-#
-# zsh-autosuggestions
-#
-
-# Disable automatic widget re-binding on each precmd. This can be set when
-# zsh-users/zsh-autosuggestions is the last module in your ~/.zimrc.
-ZSH_AUTOSUGGEST_MANUAL_REBIND=1
-
-# Customize the style that the suggestions are shown with.
-# See https://github.com/zsh-users/zsh-autosuggestions/blob/master/README.md#suggestion-highlight-style
-#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
-
-#
-# zsh-syntax-highlighting
-#
-
-# Set what highlighters will be used.
-# See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-
-# Customize the main highlighter styles.
-# See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/main.md#how-to-tweak-it
-#typeset -A ZSH_HIGHLIGHT_STYLES
-#ZSH_HIGHLIGHT_STYLES[comment]='fg=242'
-
-# ------------------
-# Initialize modules
-# ------------------
-
-ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
-if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
-  # Download zimfw script if missing.
-  if (( ${+commands[curl]} )); then
-    curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
-  else
-    mkdir -p ${ZIM_HOME} && wget -nv -O ${ZIM_HOME}/zimfw.zsh https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
-  fi
-fi
-if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
-  # Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
-  source ${ZIM_HOME}/zimfw.zsh init -q
-fi
-source ${ZIM_HOME}/init.zsh
-
-# ------------------------------
-# Post-init module configuration
-# ------------------------------
-
-#
-# zsh-history-substring-search
-#
-
-# Bind ^[[A/^[[B manually so up/down works both before and after zle-line-init
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-
-# Bind up and down keys
-zmodload -F zsh/terminfo +p:terminfo
-if [[ -n ${terminfo[kcuu1]} && -n ${terminfo[kcud1]} ]]; then
-  bindkey ${terminfo[kcuu1]} history-substring-search-up
-  bindkey ${terminfo[kcud1]} history-substring-search-down
-fi
-
-bindkey '^P' history-substring-search-up
-bindkey '^N' history-substring-search-down
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
-# }}} End configuration added by Zim install
-
-# Use powerline
-USE_POWERLINE="true"
-# Source manjaro-zsh-configuration
-if [[ -e /usr/share/zsh/manjaro-zsh-config ]]; then
-  source /usr/share/zsh/manjaro-zsh-config
-fi
-# Use manjaro zsh prompt
-if [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
-  source /usr/share/zsh/manjaro-zsh-prompt
-fi
-export PATH=$PATH:/opt/anaconda/bin/
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/anaconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/opt/anaconda/etc/profile.d/conda.sh" ]; then
-        . "/opt/anaconda/etc/profile.d/conda.sh"
-    else
-        export PATH="/opt/anaconda/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-export LC_ALL=zh_CN.UTF-8
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-
-#rofi configure
-export PATH=$HOME/.config/rofi/bin:$PATH
-
-
-
-#questasim mentor
-#
-export LM_LICENSE_FILE=/opt/mentor/questasim/linux_x86_64/mgls/lib/LICENSE.TXT
+export LM_LICENSE_FILE=/opt/mentor/questasim/linux_x86_64/mgls/lib/license_root.txt
 export PATH=$PATH:/opt/mentor/questasim/linux_x86_64
-alias  licm="lmgrd -c /opt/mentor/questasim/linux_x86_64/mgls/lib/LICENSE.TXT"
+alias  licm="lmgrd -c /opt/mentor/questasim/linux_x86_64/mgls/lib/license_root.txt"
