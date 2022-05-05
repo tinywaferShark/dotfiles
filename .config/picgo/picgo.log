@@ -203,3 +203,29 @@ StatusCodeError: 502 - "<!DOCTYPE html>\n<html>\n\n<head>\n  <meta http-equiv=\"
  
 2022-04-07 19:48:37 [PicGo WARN] [PicGo Server] upload failed, see picgo.log for more detail ↑ 
 2022-04-07 19:49:15 [PicGo INFO] [PicGo Server] shutdown 
+2022-04-29 15:48:00 [PicGo INFO] [PicGo Server] is listening at 36677 
+2022-04-29 19:45:46 [PicGo INFO] [PicGo Server] is listening at 36677 
+2022-04-29 19:47:15 [PicGo INFO] [PicGo Server] get the request  
+2022-04-29 19:47:15 [PicGo INFO] [PicGo Server] upload clipboard file 
+2022-04-29 19:47:15 [PicGo ERROR] 
+------Error Stack Begin------
+Error: Please install xclip before run picgo
+    at Socket.<anonymous> (/tmp/.mount_PicGo-Eg9CNb/resources/app.asar/node_modules/picgo/dist/src/utils/getClipboardImage.js:75:35)
+    at Socket.emit (events.js:200:13)
+    at addChunk (_stream_readable.js:294:12)
+    at readableAddChunk (_stream_readable.js:275:11)
+    at Socket.Readable.push (_stream_readable.js:210:10)
+    at Pipe.onStreamRead (internal/stream_base_commons.js:166:17)
+-------Error Stack End------- 
+2022-04-29 19:47:15 [PicGo WARN] [PicGo Server] upload failed, see picgo.log for more detail ↑ 
+2022-04-29 19:48:52 [PicGo INFO] [PicGo Server] get the request  
+2022-04-29 19:48:52 [PicGo INFO] [PicGo Server] upload clipboard file 
+2022-04-29 19:48:52 [PicGo INFO] Before transform 
+2022-04-29 19:48:52 [PicGo INFO] Transforming... Current transformer is [path] 
+2022-04-29 19:48:52 [PicGo INFO] Before upload 
+2022-04-29 19:48:52 [PicGo INFO] beforeUploadPlugins: renameFn running 
+2022-04-29 19:48:52 [PicGo INFO] Uploading... Current uploader is [gitee] 
+2022-04-29 19:49:18 [PicGo SUCCESS] 
+https://gitee.com/LittleShark/obimg/raw/master/img/20220429194852.png 
+2022-04-29 20:47:31 [PicGo INFO] [PicGo Server] shutdown 
+2022-05-04 21:44:00 [PicGo INFO] [PicGo Server] is listening at 36677 

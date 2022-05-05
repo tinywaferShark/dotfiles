@@ -1,3 +1,3 @@
-2022/04/07-19:48:23.316 8407 Reusing MANIFEST /home/shark/.config/picgo/Local Storage/leveldb/MANIFEST-000001
-2022/04/07-19:48:23.316 8407 Recovering log #3
-2022/04/07-19:48:23.316 8407 Reusing old log /home/shark/.config/picgo/Local Storage/leveldb/000003.log 
+2022/05/04-21:44:01.372 ff20 Reusing MANIFEST leveldb/MANIFEST-000001
+2022/05/04-21:44:01.373 ff20 Recovering log #3
+2022/05/04-21:44:01.374 ff20 Reusing old log leveldb/000003.log 

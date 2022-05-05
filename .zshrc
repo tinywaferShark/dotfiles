@@ -104,12 +104,20 @@ alias ls="${aliases[ls]:-ls} -A"
 setopt glob_dots     # no special treatment for file names with a leading dot
 setopt no_auto_menu  # require an extra TAB press to open the completion menu
 
+# Store your own aliases in the ~/.aliases file and load the here.
+[[ -f "~/.config/myscript/alias" ]] && source "~/.config/myscript/alias"
+
 alias :q="exit"
 alias vi="nvim.appimage"
 alias nvim="nvim.appimage"
+alias ra="ranger"
 
 
 
+#xilinx
+source /opt/Xilinx/Vivado/2021.2/settings64.sh
+source /opt/Xilinx/Vitis_HLS/2021.2/settings64.sh
+source /opt/Xilinx/Model_Composer/2021.2/settings64.sh
 
 
 ##export 
@@ -117,3 +125,9 @@ alias nvim="nvim.appimage"
 export LM_LICENSE_FILE=/opt/mentor/questasim/linux_x86_64/mgls/lib/license_root.txt
 export PATH=$PATH:/opt/mentor/questasim/linux_x86_64
 alias  licm="lmgrd -c /opt/mentor/questasim/linux_x86_64/mgls/lib/license_root.txt"
+
+#fzf
+#export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
+
+export FZF_DEFAULT_OPTS="--height 80% --layout=reverse --border --preview '~/.config/myscript/fzf-scope.sh {} '"
+export FZF_DEFAULT_COMMAND="fd --exclude={.wine,.git,.idea,.vscode,.sass-cache,node_modules,build,.local,.steam,.m2,.rangerdir,.ssh,.ghidra,.mozilla} --type f --hidden --follow"

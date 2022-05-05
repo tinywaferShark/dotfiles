@@ -1,0 +1,5 @@
+# Get External IP / Internet Speed
+
+# NOTE: On Q3 2021, Le Wagon decided to change the Web Dev curriculum default text editor
+alias  pacmanS = 'pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S'
+alias  pacmanR = 'pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns'

@@ -6,12 +6,12 @@
       "token": ""
     },
     "gitee": {
-      "repo": "LittleShark/obimg",
       "branch": "master",
-      "token": "4cebe98ffb3ac18631fb905606626475",
-      "path": "img",
       "customPath": "yearMonth",
-      "customUrl": ""
+      "customUrl": "",
+      "path": "img",
+      "repo": "LittleShark/obimg",
+      "token": "41a2a8bff8c443d1d454cf23adcc193e"
     }
   },
   "settings": {
@@ -29,7 +29,8 @@
       "enable": true
     },
     "privacyEnsure": true,
-    "showUpdateTip": true
+    "showUpdateTip": true,
+    "pasteStyle": "markdown"
   },
   "picgoPlugins": {
     "picgo-plugin-gitee-uploader": true
@@ -38,6 +39,6 @@
   "PICGO_ENV": "GUI",
   "needReload": false,
   "picgo-plugin-gitee-uploader": {
-    "lastSync": "2022-04-07 07:47:22"
+    "lastSync": "2022-04-29 07:48:53"
   }
 }

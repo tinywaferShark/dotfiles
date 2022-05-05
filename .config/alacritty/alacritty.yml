@@ -24,11 +24,11 @@ window:
     x: 10
     y: 15
   dynamic_padding: false
-  startup_mode: Windowed
+  startup_mode: Maximized
   # 窗口修饰
   # - full: 有边界+标题栏
   # - none: 无边界+标题栏
-  decorations: full
+  decorations: none
 
 scrolling:
   # 历史保留行数
