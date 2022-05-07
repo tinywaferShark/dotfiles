@@ -113,7 +113,8 @@ alias nvim="nvim.appimage"
 alias ra="ranger"
 
 
-
+export PATH=$PATH:/home/shark/.cargo/bin
+export PATH=$PATH:/opt/slang/bin
 #xilinx
 source /opt/Xilinx/Vivado/2021.2/settings64.sh
 source /opt/Xilinx/Vitis_HLS/2021.2/settings64.sh
