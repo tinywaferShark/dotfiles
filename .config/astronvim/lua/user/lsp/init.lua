@@ -1,13 +1,15 @@
+-- require"user.lsp.veridian"
 return {
   -- enable servers that you already have installed without lsp-installer
   -- NOTE: Configurations
   -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
   servers = {
-    -- "pyright",
-    -- "clangd",
-    -- "sumneko_lua",
+    "pyright",
+    "clangd",
+    "sumneko_lua",
+    "veridian",
     -- "svlangserver",
-    "svls",
+    -- "svls",
   },
   -- add to the server on_attach function
   -- on_attach = function(client, bufnr)
@@ -21,6 +23,9 @@ return {
   -- Add overrides for LSP server settings, the keys are the name of the server
   ["server-settings"] = {
     -- svlangserver = require "user.lsp.svlangserver",
-    svls = require "user.lsp.svls",
+    -- svls = require "user.lsp.svls",
+    -- veridian = require"user.lsp.veridian",
+    pyright = require "user.lsp.pyright",
+    sumneko_lua = require "user.lsp.sumneko_lua",
   },
 }

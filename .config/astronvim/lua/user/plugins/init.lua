@@ -1,10 +1,9 @@
 return {
   {
     "ur4ltz/surround.nvim",
-    event = "BufRead",
     config = function()
-      require("surround").setup { mappings_style = "surround" }
-    end,
+      require"surround".setup {mappings_style = "surround"}
+    end
   },
   {
     "phaazon/hop.nvim",
@@ -54,6 +53,26 @@ return {
   config = function()
       require("user.plugins.todo-comments")
   end
-}
+},
+--cmp增加
+{
+  "onsails/lspkind-nvim",
+  after = "nvim-cmp",
+},
+{
+  "hrsh7th/cmp-cmdline",
+  after = "nvim-cmp",
+  config = function()
+    require("core.utils").add_user_cmp_source "cmp-cmdline"
+  end,
+},
+
+-- 灯泡提示代码行为
+ {
+  "kosayoda/nvim-lightbulb",
+  config = function()
+      require("user.plugins.nvim-lightbulb")
+  end
+},
 
 }

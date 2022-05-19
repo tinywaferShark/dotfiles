@@ -108,19 +108,54 @@ setopt no_auto_menu  # require an extra TAB press to open the completion menu
 [[ -f "~/.config/myscript/alias" ]] && source "~/.config/myscript/alias"
 
 alias :q="exit"
-alias vi="nvim.appimage"
-alias nvim="nvim.appimage"
+# alias vi="nvim.appimage"
+# alias nvim="nvim.appimage"
 alias ra="ranger"
+alias vim="lvim"
+
+# synopsys
+#Synopsys
+export DVE_HOME=/opt/synopsys/vcs-mx/O-2018.09-SP2
+export VCS_HOME=/opt/synopsys/vcs-mx/O-2018.09-SP2
+export VCS_MX_HOME=/opt/synopsys/vcs-mx/O-2018.09-SP2
+export LD_LIBRARY_PATH=/opt/synopsys/verdi/Verdi_O-2018.09-SP2/share/PLI/PLI/VCS/LINUX64
+export VERDI_HOME=/opt/synopsys/verdi/Verdi_O-2018.09-SP2
+export SCL_HOME=/opt/synopsys/scl/2018.06
+#dve
+export PATH=$PATH:$VCS_HOME/gui/dve/bin
+alias dve="dve -full64"
+#VCS
+export PATH=$PATH:$VCS_HOME/bin
+alias vcs="vcs -full64"
+#VERDI
+export PATH=$PATH:$VERDI_HOME/bin
+alias verdi="verdi"
+#scl
+export PATH=$PATH:$SCL_HOME/linux64/bin
+export VCS_ARCH_OVERRIDE=linux
+#LICENCE
+export SNPSLMD_LICENSE_FILE=27000@manjarocomputer
+export LM_LICENSE_FILE=27000@manjarocomputer
+alias  lmg_synopsys="/opt/synopsys/scl/2018.06/linux64/bin/lmgrd -c /opt/synopsys/scl/2018.06/admin/license/lic.dat"
+export VCS_TARGET_ARCH=linux64  
+export LD_LIBRARY_PATH=$VERDI_HOME/share/PLI/VCS/LINUX64:$LD_LIBRARY_PATH 
+export LD_LIBRARY_PATH=$VERDI_HOME/share/PLI/IUS/LINUX64:$LD_LIBRARY_PATH 
+export LD_LIBRARY_PATH=$VERDI_HOME/share/PLI/lib/LINUX64:$LD_LIBRARY_PATH 
+export LD_LIBRARY_PATH=$VERDI_HOME/share/PL
 
 
+
+#RUST
 export PATH=$PATH:/home/shark/.cargo/bin
 export PATH=$PATH:/opt/slang/bin
+
 #xilinx
 source /opt/Xilinx/Vivado/2021.2/settings64.sh
 source /opt/Xilinx/Vitis_HLS/2021.2/settings64.sh
 source /opt/Xilinx/Model_Composer/2021.2/settings64.sh
 
-
+#microsoft_edge_edgedriver_linux64
+export PATH=$PATH:/mnt/e/download/Browser/edgedriver_linux64
 ##export 
 #
 export LM_LICENSE_FILE=/opt/mentor/questasim/linux_x86_64/mgls/lib/license_root.txt
