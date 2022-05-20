@@ -9,13 +9,14 @@ an executable
 -- THESE ARE EXAMP CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 
 --plugins
+
 require "user.plugins"
 require "user.keybindings"
 require "user.lsp"
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = true
-lvim.colorscheme = "onedarker"
+lvim.colorscheme = "catppuccin" --"onedarker"
 
 vim.o.guifont = "JetBrainsMono Nerd Font"
 -- to disable icons and use a minimalist setup, uncomment the following
@@ -32,6 +33,7 @@ lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 0
 
 -- if you don't want all the parsers change this to a table of the ones you want
+
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
   "c",
