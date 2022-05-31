@@ -5,6 +5,9 @@ lvim.builtin.which_key.mappings["R"] = {
   s = { "<cmd>lua require('spectre').open_visual({select_word=true})<CR>", "Search" },
 }
 
+lvim.builtin.which_key.mappings["o"] = {
+  "<cmd>SymbolsOutline<cr>", "SymbolsOutline"
+}
 
 -- lvim.builtin.which_key.mappings["f"] = {
 --   name = "telescope search",
@@ -25,6 +28,9 @@ lvim.builtin.which_key.mappings["sB"] = {
   "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown({}))<cr>", "find buffers"
 }
 
+lvim.builtin.which_key.mappings["sb"] = {
+  "<cmd>Telescope current_buffer_fuzzy_find<cr>", "current_buffer_fuzzy_find"
+}
 lvim.builtin.which_key.mappings["so"] = {
   "<cmd>lua require('telescope.builtin').oldfiles()<cr>", "find old files"
 }

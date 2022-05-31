@@ -124,6 +124,19 @@ lvim.plugins = {
     end,
   },
   {
-
-  }
+    'wakatime/vim-wakatime'
+  },
+  {
+    "npxbr/glow.nvim",
+    ft = { "markdown" }
+    -- run = "yay -S glow"
+  },
+  {
+    "iamcco/markdown-preview.nvim",
+    run = "cd app && npm install",
+    ft = "markdown",
+    config = function()
+      vim.g.mkdp_auto_start = 1
+    end,
+  },
 }
