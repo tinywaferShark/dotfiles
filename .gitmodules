@@ -1,0 +1,3 @@
+[submodule "/home/shark/.config/nvim"]
+	path = /home/shark/.config/nvim
+	url = git@github.com:tinywaferShark/nvim_lazy.git
